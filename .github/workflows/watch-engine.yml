@@ -1,4 +1,4 @@
-name: Monitor and Build Engine Branch
+name: Build Engine Branch
 
 on:
   push:
@@ -6,19 +6,19 @@ on:
 
 jobs:
   build-engine-from-devops:
-    name: Build Engine Code (even though workflow is in devops)
+    name: Build Engine Code 
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout engine branch code
         uses: actions/checkout@v3
         with:
-          ref: engine    # IMPORTANT: This tells GitHub to checkout code from engine branch
+          ref: engine    
 
       - name: Confirm branch
         run: git branch
 
-      - name: Build engine container
+      - name: Build container
         run: |
           docker build -t autoaudit/engine -f docker/engine.Dockerfile .
 
