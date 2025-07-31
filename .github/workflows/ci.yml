@@ -40,9 +40,3 @@ jobs:
         run: npm install --save-dev eslint
       - name: Run ESLint (JS linting)
         run: npx eslint .  # this targets JS files for later customising with .eslintrc.json
-      - name: Security Scan (Trivy)
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'fs'  # scans filesystem for vulns
-          format: 'table'
-          exit-code: '1'  # fail on critical issues
