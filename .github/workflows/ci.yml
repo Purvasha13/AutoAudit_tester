@@ -1,0 +1,48 @@
+name: CI with Linting
+
+on:
+  push:
+    branches: ['*']
+  pull_request:
+    branches: ['*']
+#ignore for now------------------------------------------
+
+  #schedule:
+   # - cron: '37 20 * * 4'  # keeps Grype weekly scan
+
+#permissions:
+#  contents: read
+#  security-events: write  # for when uploading SARIF reports
+#  actions: read  # for private repos
+
+#---------------------------------------------------------
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Install Python linting tools
+        run: pip install flake8 black
+      - name: Run Flake8 (Python linting)
+        run: flake8 .  # add --ignore=E501 (custom rules if needed)
+      - name: Run Black (Python formatting check)
+        run: black --check .
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install JS linting tools
+        run: npm install --save-dev eslint
+      - name: Run ESLint (JS linting)
+        run: npx eslint .  # this targets JS files for later customising with .eslintrc.json
+      - name: Security Scan (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'  # scans filesystem for vulns
+          format: 'table'
+          exit-code: '1'  # fail on critical issues
