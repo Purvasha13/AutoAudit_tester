@@ -13,10 +13,10 @@ name: Security/Vulnerability Scan
 
 on:
   push:
-    branches: [Compliance-Engine, DevSecOps, main]
+    branches: [Compliance-Engine, main]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [Compliance-Engine, DevSecOps, main]
+    branches: [Compliance-Engine, main]
   schedule:
     - cron: '37 20 * * 4'
 
