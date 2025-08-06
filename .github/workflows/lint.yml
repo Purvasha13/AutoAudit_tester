@@ -5,17 +5,6 @@ on:
     branches: ['*']
   pull_request:
     branches: ['*']
-#ignore for now------------------------------------------
-
-  #schedule:
-   # - cron: '37 20 * * 4'  # keeps Grype weekly scan
-
-#permissions:
-#  contents: read
-#  security-events: write  # for when uploading SARIF reports
-#  actions: read  # for private repos
-
-#---------------------------------------------------------
 
 jobs:
   lint:
@@ -29,7 +18,7 @@ jobs:
       - name: Install Python linting tools
         run: pip install flake8 black
       - name: Run Flake8 (Python linting)
-        run: flake8 .  # add --ignore=E501 (custom rules if needed)
+        run: flake8 .  
       - name: Run Black (Python formatting check)
         run: black --check .
       - name: Set up Node.js
