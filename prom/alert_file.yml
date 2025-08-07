@@ -3,7 +3,7 @@ groups:
   rules:
     # Service is unreachable (down) for over 5 minutes
     - alert: ServiceDown
-      expr: up{job=""} == 0
+      expr: up == 0
       for: 5m
       labels:
         severity: critical
@@ -11,7 +11,7 @@ groups:
       annotations:
         summary: "Service is unreachable"
         description: |
-          The monitored service/job '' has been DOWN (no healthy targets) for over 5 minutes.
+          The monitored service/job has been DOWN (no healthy targets) for over 5 minutes.
 
     # High average CPU usage for more than 10 minutes
     - alert: HighCPUUsage

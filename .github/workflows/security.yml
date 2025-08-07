@@ -37,7 +37,7 @@ jobs:
       
     # --- [1] Build container image for Grype scan ---
     - name: Build the Docker image
-      run: docker build -t devsecops-workflows:latest -f docker/Dockerfile.
+      run: docker build -t devsecops-workflows:latest -f docker/engine.Dockerfile.
 
     # --- [2] Container vulnerability scan (Grype) ---
     - name: Run the Anchore Grype scan action
