@@ -1,8 +1,0 @@
-{
-  "devDependencies": {
-    "eslint": "^9.32.0"
-  },
-  "dependencies": {
-    "python3": "^0.0.1"
-  }
-}
