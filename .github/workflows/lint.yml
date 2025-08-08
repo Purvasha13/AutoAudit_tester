@@ -1,0 +1,31 @@
+name: CI with Linting
+
+on:
+  push:
+    branches: ['*']
+  pull_request:
+    branches: ['*']
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Install Python linting tools
+        run: pip install flake8 black
+      - name: Run Flake8 (Python linting)
+        run: flake8 .  
+      - name: Run Black (Python formatting check)
+        run: black --check .
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install JS linting tools
+        run: npm install --save-dev eslint
+      - name: Run ESLint (JS linting)
+        run: npx eslint .  # this targets JS files for later customising with .eslintrc.json
