@@ -1,10 +1,9 @@
 #version: '3.8'
-
 services:
   backend:
-    image: purva13/autoaudit:staging
     env_file:
       - ./env/staging.env
+    container_name: autoaudit-backend-staging
     ports:
-      - "5001:5000"
-    restart: unless-stopped
+      - "5002:5000"
+    restart: no

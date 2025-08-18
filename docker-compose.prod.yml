@@ -1,10 +1,10 @@
 #version: '3.8'
-
+#version: '3.8'
 services:
   backend:
-    image: purva13/autoaudit:prod
     env_file:
       - ./env/prod.env
+    container_name: autoaudit-backend-prod
     ports:
-      - "5002:5000"
-    restart: always
+      - "5003:5000"
+    restart: no

@@ -1,0 +1,26 @@
+name: AutoAudit Dev CI/CD Demo
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker image
+        run: docker build -f docker/engine.Dockerfile -t autoaudit_tester-backend .
+
+      - name: Run container and test endpoint
+        run: |
+          docker run -d -p 5000:5000 --name demo autoaudit_tester-backend
+          sleep 5
+          curl http://localhost:5000/data
+          docker stop demo

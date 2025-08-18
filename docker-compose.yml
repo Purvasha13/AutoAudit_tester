@@ -1,12 +1,9 @@
 #version: '3.8'
-version: '3.8'
-
 services:
   backend:
-    image: purva13/autoaudit:latest  # Default image, overridden per env
-    working_dir: /app
-    environment:
-      - APP_ENV=default
+    build:
+      context: .
+      dockerfile: docker/engine.Dockerfile
     ports:
       - "5000:5000"
-    restart: unless-stopped
+
